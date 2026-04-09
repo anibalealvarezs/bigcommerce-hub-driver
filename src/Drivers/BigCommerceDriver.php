@@ -40,4 +40,9 @@ class BigCommerceDriver implements SyncDriverInterface
             'message' => 'BigCommerce modular driver placeholder executed successfully.'
         ]));
     }
+    public function getApi(array $config = []): mixed
+    {
+        return null;
+    }
 }
+
