@@ -2,7 +2,7 @@
 
 namespace Anibalealvarezs\BigCommerceHubDriver\Auth;
 
-use Anibalealvarezs\ApiDriverCore\Interfaces\AuthProviderInterface;
+use Anibalealvarezs\ApiSkeleton\Interfaces\AuthProviderInterface;
 
 class BigCommerceAuthProvider implements AuthProviderInterface
 {
