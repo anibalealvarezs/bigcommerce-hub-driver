@@ -8,6 +8,7 @@ use Anibalealvarezs\ApiSkeleton\Traits\HasUpdatableCredentials;
 use Symfony\Component\HttpFoundation\Response;
 use Psr\Log\LoggerInterface;
 use DateTime;
+use Anibalealvarezs\ApiSkeleton\Interfaces\SeederInterface;
 
 class BigCommerceDriver implements SyncDriverInterface
 {
@@ -78,5 +79,13 @@ class BigCommerceDriver implements SyncDriverInterface
     public function validateConfig(array $config): array
     {
         return $config;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function seedDemoData(SeederInterface $seeder, array $config = []): void
+    {
+        // Placeholder for future implementation
     }
 }
