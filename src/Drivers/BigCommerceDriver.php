@@ -12,6 +12,11 @@ use Anibalealvarezs\ApiDriverCore\Interfaces\SeederInterface;
 
 class BigCommerceDriver implements SyncDriverInterface
 {
+
+    public static function getCommonConfigKey(): ?string
+    {
+        return null;
+    }
     use HasUpdatableCredentials;
 
     private ?AuthProviderInterface $authProvider = null;
