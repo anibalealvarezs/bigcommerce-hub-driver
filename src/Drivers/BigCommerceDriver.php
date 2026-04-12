@@ -9,9 +9,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Psr\Log\LoggerInterface;
 use DateTime;
 use Anibalealvarezs\ApiDriverCore\Interfaces\SeederInterface;
+use Anibalealvarezs\ApiDriverCore\Traits\SyncDriverTrait;
 
 class BigCommerceDriver implements SyncDriverInterface
 {
+    use SyncDriverTrait;
 
     /**
      * Store credentials for this driver.
@@ -84,10 +86,7 @@ class BigCommerceDriver implements SyncDriverInterface
         ];
     }
 
-    public static function getCommonConfigKey(): ?string
-    {
-        return null;
-    }
+
     use HasUpdatableCredentials;
 
     private ?AuthProviderInterface $authProvider = null;
@@ -179,6 +178,8 @@ class BigCommerceDriver implements SyncDriverInterface
         ];
     }
 
+
+
     /**
      * @inheritdoc
      */
@@ -199,10 +200,19 @@ class BigCommerceDriver implements SyncDriverInterface
     {
         return $currentConfig;
     }
-
     public function prepareUiConfig(array $channelConfig): array
     {
         return [];
+    }
+    /**
+     * @inheritdoc
+     */
+    public function getDateFilterMapping(): array
+    {
+        return [
+            'start' => 'createdAtMin',
+            'end' => 'createdAtMax'
+        ];
     }
 }
 
