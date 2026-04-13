@@ -136,7 +136,7 @@ class BigCommerceDriver implements SyncDriverInterface
     {
         return [
             'global' => [
-                'enabled' => true,
+                'enabled' => false,
                 'cache_history_range' => '1 year',
                 'cache_aggregations' => false,
             ],
@@ -153,7 +153,11 @@ class BigCommerceDriver implements SyncDriverInterface
      */
     public function validateConfig(array $config): array
     {
-        return $config;
+        return \Anibalealvarezs\ApiDriverCore\Services\ConfigSchemaRegistryService::hydrate(
+            $this->getChannel(),
+            'global',
+            $config
+        );
     }
 
     /**
