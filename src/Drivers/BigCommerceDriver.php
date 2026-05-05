@@ -10,10 +10,24 @@ use Psr\Log\LoggerInterface;
 use DateTime;
 use Anibalealvarezs\ApiDriverCore\Interfaces\SeederInterface;
 use Anibalealvarezs\ApiDriverCore\Traits\SyncDriverTrait;
+use Anibalealvarezs\ApiDriverCore\Interfaces\CanonicalMetricDictionaryProviderInterface;
+use Anibalealvarezs\ApiDriverCore\Interfaces\AggregationProfileProviderInterface;
+use Anibalealvarezs\ApiDriverCore\Classes\AggregationProfileTemplates;
 
-class BigCommerceDriver implements SyncDriverInterface
+class BigCommerceDriver implements SyncDriverInterface, CanonicalMetricDictionaryProviderInterface, AggregationProfileProviderInterface
 {
     use SyncDriverTrait;
+
+    public static function getAggregationProfiles(): array
+    {
+        return [
+            AggregationProfileTemplates::storeProfile(
+                channel: 'bigcommerce',
+                key: 'bigcommerce_store',
+                label: 'BigCommerce Store Performance'
+            ),
+        ];
+    }
 
     /**
      * Store credentials for this driver.
@@ -187,6 +201,22 @@ class BigCommerceDriver implements SyncDriverInterface
                 'url_id_regex' => null
             ]
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function getCanonicalMetricDictionary(): array
+    {
+        return [
+            'conversions' => ['order_count'],
+            'roas_purchase' => ['roas'],
+        ];
+    }
+
+    public static function getPlatformEntityIdField(): string
+    {
+        return 'store_hash';
     }
 
 
